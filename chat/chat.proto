@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+message UserRequest {
+    enum UserRequestType {
+        USER_LOGIN = 0;
+        USER_CHAT = 1;
+    }
+    UserRequestType req_type = 1;
+    oneof user_request_values {
+        string name = 2;
+        string chat = 3;
+    }
+}
+
+message ChatMsg {
+    int64 user_id = 1;
+    string msg = 2;
+}
+
+message RoomMsg {
+    enum RoomMsgType {
+        USER_JOIN = 0;
+        USER_LEAVE = 1;
+        USER_CHAT = 2;
+    }
+    RoomMsgType msg_type = 1;
+    int64 user_id = 2;
+    oneof room_msg_values {
+        string name = 3;
+        string msg = 4;
+    }
+}
+
+service Chat {
+    rpc Chat(stream UserRequest) returns (stream RoomMsg) {}
+}
