@@ -1,2 +1,2 @@
 # chat
-Simple Chat Application Using Google Protocol Buffer
+Simple Chat Application Using grpc
